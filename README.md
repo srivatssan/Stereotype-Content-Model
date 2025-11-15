@@ -1,198 +1,220 @@
-SCM + BIAS Map Survey (React)
+# 🧭 SCM + BIAS Map Survey (React + Tailwind v4)
 
-Interactive survey and visualization tool for the Stereotype Content Model (SCM) and the BIAS Map.
-Managers can rate groups on Warmth and Competence, then see animated quadrant placement, emotion/behavior inferences, and export the chart.
+An interactive, full-screen **Stereotype Content Model (SCM)** and **BIAS Map** survey and visualization tool.
 
-https://user-images…
- (add a short screen recording or GIF here)
+Managers can rate different groups or teams on **Warmth** and **Competence**, visualize the results on an animated quadrant chart, infer emotions and behavioral tendencies, and export the chart as a PNG.
 
-✨ Features
+---
 
-10-item Warmth/Competence questionnaire (Likert 1–7)
+## ✨ Features
 
-Live averages per group and animated BIAS Map (Recharts + Framer Motion)
+- 10-item **Warmth** & **Competence** survey (Likert 1–7 scale)  
+- Real-time averages and **animated BIAS Map visualization**  
+- Quadrant overlays (Admired, Paternalized, Envied, Dehumanized)  
+- Per-group **Emotion** and **Behavior** summaries  
+- **Responsive full-screen layout** (mobile → widescreen)  
+- **Export chart to PNG**, with Tailwind v4 OKLCH color compatibility fix  
+- Neutral, professional dark UI — no bright accent colors  
+- Built using **Vite**, **React**, **Tailwind v4**, **Framer Motion**, **Recharts**, **html2canvas**
 
-Quadrant overlays (Admired, Paternalized, Envied, Dehumanized)
+---
 
-Per-group emotion & behavior summaries
+## 🧱 Tech Stack
 
-Export chart to PNG (html2canvas)
+| Category | Library |
+|-----------|----------|
+| Framework | [React](https://react.dev/) (via [Vite](https://vitejs.dev/)) |
+| Styling | [Tailwind CSS v4](https://tailwindcss.com/blog/tailwindcss-v4-alpha) + `@tailwindcss/cli` |
+| Animations | [Framer Motion](https://www.framer.com/motion/) |
+| Charts | [Recharts](https://recharts.org/en-US/) |
+| Image Export | [html2canvas](https://html2canvas.hertzen.com/) |
+| Optional Alternative | [html-to-image](https://github.com/bubkoo/html-to-image) |
 
-Vite dev server (fast HMR), Tailwind v4 styling
+---
 
-🧱 Tech Stack
+## 🪜 Quick Start
 
-React (Vite)
+### 1. Clone the Repository
 
-Tailwind CSS v4 (with @tailwindcss/cli)
-
-Framer Motion (animations)
-
-Recharts (scatter plot)
-
-html2canvas (PNG export)
-
-Packages used
-react, react-dom
-vite
-tailwindcss (v4)
-@tailwindcss/cli
-framer-motion
-recharts
-html2canvas
-
-
-If you prefer the classic Tailwind v3 flow later, pin tailwindcss@3 and use npx tailwindcss init -p. This project is set up for Tailwind v4.
-
-🚀 Quick Start
-1) Clone
-git clone https://github.com/<you>/<repo-name>.git
+```bash
+git clone https://github.com/<your-username>/<repo-name>.git
 cd <repo-name>
+```
 
-2) Install
+### 2. Install Dependencies
+
+```bash
 npm install
+```
 
+If you’re setting this up from scratch:
 
-If you are setting this up from scratch, also install the Tailwind v4 CLI:
-
+```bash
 npm install -D tailwindcss @tailwindcss/cli
+npm install framer-motion recharts html2canvas
+```
 
-3) Build Tailwind CSS (v4)
+### 3. Build Tailwind CSS (v4)
 
-Tailwind v4 uses a single @import "tailwindcss"; entry file and the CLI to build CSS.
+Create a `src/tw.css` file:
 
-Ensure you have an input file (this repo uses src/tw.css):
-
-/* src/tw.css */
+```css
 @import "tailwindcss";
+```
 
+Then add these scripts in your `package.json` if not already there:
 
-Development (watch mode, terminal 1):
-
-npm run dev:css
-
-
-Start the app (terminal 2):
-
-npm run dev
-
-
-Production build:
-
-npm run build:css && npm run build
-
-4) Open
-
-Vite will print a URL such as:
-
-http://localhost:5173/
-
-📂 Project Structure
-.
-├─ index.html
-├─ package.json
-├─ vite.config.js
-├─ tailwind.config.js         # optional (not required for v4, but you can add one)
-├─ postcss.config.js          # optional (for plugins; not required for v4 base)
-└─ src/
-   ├─ main.jsx
-   ├─ App.jsx                 # survey + chart (this repo’s main component)
-   ├─ tw.css                  # tailwind v4 input CSS (build source)
-   └─ tailwind.css            # generated CSS (built by CLI)
-
-
-In src/main.jsx ensure you import the built CSS:
-
-import './tailwind.css'
-
-🧪 Scripts
-
-Add these to package.json (already included in this repo):
-
+```json
 {
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-
     "dev:css": "tailwindcss -i ./src/tw.css -o ./src/tailwind.css -w",
     "build:css": "tailwindcss -i ./src/tw.css -o ./dist/tailwind.css -m"
   }
 }
+```
 
-🛠 Configuration (Tailwind v4)
+Run both during development (in separate terminals):
 
-Tailwind v4 does not require a config to start.
-If you want to customize theme, plugins, or content scanning, create tailwind.config.js:
+```bash
+npm run dev:css
+npm run dev
+```
 
-// tailwind.config.js (optional)
-export default {
-  content: ["./index.html", "./src/**/*.{js,jsx,ts,tsx}"],
-  theme: { extend: {} },
-  plugins: []
+Visit:
+
+```
+http://localhost:5173/
+```
+
+---
+
+## 📂 Project Structure
+
+```
+.
+├─ index.html
+├─ package.json
+├─ vite.config.js
+├─ tailwind.config.js         # optional, not required for Tailwind v4
+├─ src/
+│  ├─ main.jsx                # imports tailwind.css
+│  ├─ App.jsx                 # main application (survey + chart)
+│  ├─ tw.css                  # Tailwind source
+│  └─ tailwind.css            # compiled CSS output
+```
+
+---
+
+## 🧾 PNG Export Behavior (Tailwind v4 Compatibility)
+
+Since **Tailwind v4** uses modern `oklch()` color tokens, `html2canvas` can’t parse them.  
+We’ve implemented a **safe export helper** that injects a custom stylesheet overriding OKLCH with **hex-safe colors** (`#0b1220`, `#334155`, etc.).
+
+This ensures PNG downloads work without breaking due to unsupported color parsing.
+
+If you prefer, you can install the `html-to-image` package instead:
+
+```bash
+npm install html-to-image
+```
+
+and replace the `downloadNodeAsPng()` function with:
+
+```js
+import { toPng } from "html-to-image";
+
+async function downloadNodeAsPng(node, filename = "bias-map.png") {
+  const dataUrl = await toPng(node, { pixelRatio: 2, cacheBust: true });
+  const a = document.createElement("a");
+  a.href = dataUrl;
+  a.download = filename;
+  a.click();
 }
+```
 
-📈 How It Works (BIAS Map)
+---
 
-Warmth and Competence are averaged from 5 Likert items each.
+## 🧩 Design Notes
 
-Points are plotted on a 1–7 grid (X: Competence, Y: Warmth).
+### Layout
+- **Full viewport width** and responsive grid layout
+- On large screens, chart and insights are side-by-side
+- On small screens, stacked layout for readability
 
-Threshold lines at 4 divide quadrants:
+### Buttons
+- Neutral design with dark text for clarity and professionalism  
+  (e.g., “Export Chart”, “Back”, “Next”, “Start Over” all use `text-slate-200`)
 
-Admired (High W, High C) → Admiration → Active & Passive Help
+```jsx
+className="rounded-xl border border-slate-600 bg-slate-800/60 px-4 py-2 text-slate-200 hover:bg-slate-700 transition"
+```
 
-Paternalized (High W, Low C) → Pity → Active Help, Passive Neglect
+---
 
-Envied (Low W, High C) → Envy → Passive Help, Active Harm
+## 🧠 Conceptual Overview
 
-Dehumanized (Low W, Low C) → Contempt → Active & Passive Harm
+The **Stereotype Content Model (SCM)** explains how perceptions of *Warmth* and *Competence* shape emotions and behaviors toward social groups.
 
-🧾 Troubleshooting
+| Quadrant | Warmth | Competence | Emotion | Behavioral Tendency |
+|-----------|---------|-------------|----------|----------------------|
+| **Admired** | High | High | Admiration | Active & Passive Help |
+| **Paternalized** | High | Low | Pity | Active Help, Passive Neglect |
+| **Envied** | Low | High | Envy | Passive Help, Active Harm |
+| **Dehumanized** | Low | Low | Contempt | Active & Passive Harm |
 
-Tailwind CSS doesn’t apply
+This app visualizes those relationships dynamically for modern teams and organizations.
 
-Confirm you’re importing ./tailwind.css in main.jsx.
+---
 
-Ensure npm run dev:css is running during development.
+## 🧪 Troubleshooting
 
-If you use a config, check content globs.
+| Issue | Cause | Fix |
+|--------|--------|-----|
+| **Tailwind CSS not applying** | Missing CSS import | Ensure `import './tailwind.css'` exists in `main.jsx` |
+| **npx tailwindcss init -p fails** | Tailwind v4 removed `init` | Use `@tailwindcss/cli` and build manually |
+| **PNG export fails (oklch)** | `html2canvas` limitation | Use the patched `downloadNodeAsPng()` (included) |
+| **Chart clipped or small** | Default height too small | Edit `style={{ height: "60vh" }}` to 70–75vh |
 
-“Failed to resolve import 'framer-motion' / 'recharts'”
+---
 
-Install peer libs:
+## 📤 Deploy / Publish
 
-npm install framer-motion recharts html2canvas
-
-
-Tailwind v4 CLI says “Invalid command: init”
-
-v4 removed init. Use the CLI build commands shown above.
-
-Or pin to v3 if you prefer the old flow: npm i -D tailwindcss@3 postcss autoprefixer.
-
-PNG export looks dark/blurry
-
-We call html2canvas with { backgroundColor: "#0b1220", scale: 2 } for crisp output.
-
-Run in Chromium/Chrome for best results.
-
-📤 Publish to GitHub
+```bash
 git init
 git add .
-git commit -m "feat: SCM + BIAS Map survey app"
+git commit -m "feat: SCM + BIAS Map Survey app"
 git branch -M main
-git remote add origin https://github.com/<you>/<repo-name>.git
+git remote add origin https://github.com/<your-username>/<repo-name>.git
 git push -u origin main
+```
 
-📜 License
+To serve statically:
+```bash
+npm run build:css && npm run build
+```
+Then deploy the `dist/` folder (e.g., GitHub Pages, Vercel, or Netlify).
 
-MIT (or your preferred license)
+---
 
-🙌 Credits
+## 🧾 License
 
-SCM & BIAS Map research: Fiske, Cuddy, Glick and collaborators.
+MIT License  
+Copyright © 2025  
+Developed by **Srivatssan Srinivasan**
 
-Visualization: Recharts + Framer Motion.
+---
 
-Styling: Tailwind CSS v4.
+## 🙌 References
+
+- **Fiske, Cuddy, Glick, Xu (2002)** — *A model of (often mixed) stereotype content: competence and warmth respectively follow from perceived status and competition.* *Journal of Personality and Social Psychology, 82(6), 878–902.*
+- **Cuddy, Fiske & Glick (2007)** — *The BIAS Map: Behaviors from intergroup affect and stereotypes.* *Journal of Personality and Social Psychology, 92(4), 631–648.*
+
+---
+
+## 🧠 Author’s Note
+
+This project merges **psychological theory** with **modern front-end engineering**.  
+It’s intended for managers, researchers, and architects exploring perception dynamics inside organizations — powered by **React**, **Tailwind**, and **Generative Visualization Principles**.
